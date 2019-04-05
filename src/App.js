@@ -8,6 +8,13 @@ import NewRoomForm from './components/NewRoomForm';
 import { tokenUrl, instanceLocator } from './config';
 
 class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      messages: []
+    };
+  }
+
   componentDidMount() {
     const chatManager = new Chatkit.ChatManager({
       instanceLocator,
@@ -19,13 +26,14 @@ class App extends React.Component {
 
     chatManager.connect()
       .then(currentUser => {
-        console.log(currentUser.rooms);
         currentUser.subscribeToRoomMultipart({
           roomId: '20147461',
           messageLimit: 30,
           hooks: {
             onMessage: message => {
-              console.log("message text: ", message.parts[0].payload.content);
+              this.setState({
+                messages: [...this.state.messages, message]
+              });
             }
           }
         });
@@ -36,7 +44,7 @@ class App extends React.Component {
     return (
       <div className="app">
         <RoomList />
-        <MessageList />
+        <MessageList messages={this.state.messages} />
         <SendMessageForm />
         <NewRoomForm />
       </div>
