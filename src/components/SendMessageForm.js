@@ -21,7 +21,10 @@ class SendMessageForm extends React.Component {
   onSubmitHandler(event) {
     event.preventDefault();
     // send off the message here
-    console.log(this.state.messageText);
+    this.props.sendMessage(this.state.messageText);
+    this.setState({
+      messageText: ""
+    });
   }
 
   render() {
