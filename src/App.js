@@ -13,10 +13,13 @@ class App extends React.Component {
     this.state = {
       messages: [],
       joinableRooms: [],
-      joinedRooms: []
+      joinedRooms: [],
+      currentRoomId: ''
     };
 
     this.sendMessage = this.sendMessage.bind(this);
+    this.subscribeToRoom = this.subscribeToRoom.bind(this);
+    this.getRoomList = this.getRoomList.bind(this);
   }
 
   componentDidMount() {
@@ -31,42 +34,61 @@ class App extends React.Component {
     chatManager.connect()
       .then(currentUser => {
         this.currentUser = currentUser;
-
-        this.currentUser.getJoinableRooms()
-          .then(joinableRooms => {
-            this.setState({
-              joinableRooms,
-              joinedRooms: this.currentUser.rooms
-            });
-          })
-          .catch(err => console.log("Error at fetching rooms: ", err));
-
-        this.currentUser.subscribeToRoomMultipart({
-          roomId: '20147461',
-          messageLimit: 30,
-          hooks: {
-            onMessage: message => {
-              this.setState({
-                messages: [...this.state.messages, message]
-              });
-            }
-          }
-        });
+        this.getRoomList();
       })
       .catch(err => console.log("Connection error: ", err));
+  }
+
+  subscribeToRoom(roomId) {
+    this.setState({
+      messages: []
+    });
+    this.currentUser.subscribeToRoomMultipart({
+      roomId: roomId,
+      messageLimit: 30,
+      hooks: {
+        onMessage: message => {
+          this.setState({
+            messages: [...this.state.messages, message]
+          });
+        }
+      }
+    })
+      .then(room => {
+        this.setState({
+          currentRoomId: room.id
+        });
+        this.getRoomList();
+      })
+      .catch(err => console.log("Subscribing room errpr: ", err));
+  }
+
+  getRoomList() {
+    this.currentUser.getJoinableRooms()
+      .then(joinableRooms => {
+        this.setState({
+          joinableRooms,
+          joinedRooms: this.currentUser.rooms
+        });
+      })
+      .catch(err => console.log("Error at fetching rooms: ", err));
   }
 
   sendMessage(text) {
     this.currentUser.sendMessage({
       text,
-      roomId: '20147461'
+      roomId: this.state.currentRoomId
     });
   }
 
   render() {
     return (
       <div className="app">
-        <RoomList rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]} />
+        <RoomList
+          currentRoomId={this.state.currentRoomId}
+          subscribeToRoom={this.subscribeToRoom}
+          rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}
+        />
         <MessageList messages={this.state.messages} />
         <SendMessageForm sendMessage={this.sendMessage} />
         <NewRoomForm />
