@@ -14,7 +14,7 @@ class App extends React.Component {
       messages: [],
       joinableRooms: [],
       joinedRooms: [],
-      roomId: ''
+      currentRoomId: ''
     };
 
     this.sendMessage = this.sendMessage.bind(this);
@@ -56,7 +56,7 @@ class App extends React.Component {
     })
       .then(room => {
         this.setState({
-          roomId: room.id
+          currentRoomId: room.id
         });
         this.getRoomList();
       })
@@ -77,7 +77,7 @@ class App extends React.Component {
   sendMessage(text) {
     this.currentUser.sendMessage({
       text,
-      roomId: this.state.roomId
+      roomId: this.state.currentRoomId
     });
   }
 
@@ -85,6 +85,7 @@ class App extends React.Component {
     return (
       <div className="app">
         <RoomList
+          currentRoomId={this.state.currentRoomId}
           subscribeToRoom={this.subscribeToRoom}
           rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}
         />
