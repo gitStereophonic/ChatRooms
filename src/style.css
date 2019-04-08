@@ -83,6 +83,7 @@ html, body {
 .rooms-list .room.active p {
   color: var(--secondary-color);
   cursor: pointer;
+  margin-left: 30px;
 }
 
 .new-room-form {
@@ -159,7 +160,8 @@ html, body {
   align-items: center;
   height: 100%;
   font-size: 34px;
-  font-weight: 300;
+  font-weight: 150;
+  opacity: 0.2;
 }
 
 .send-message-form {
