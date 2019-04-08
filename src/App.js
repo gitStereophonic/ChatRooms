@@ -98,6 +98,14 @@ class App extends React.Component {
           subscribeToRoom={this.subscribeToRoom}
           rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}
         />
+        <MessageList
+          currentRoomId={this.state.currentRoomId}
+          messages={this.state.messages}
+        />
+        <SendMessageForm
+          disabled={!this.state.currentRoomId}
+          sendMessage={this.sendMessage}
+        />
         <NewRoomForm createNewRoom={this.createNewRoom} />
       </div>
     );
