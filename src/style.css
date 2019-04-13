@@ -3,7 +3,7 @@
   --secondary-color: rgb(30, 33, 39);
   --main-text-color: rgb(179, 179, 170);
   --secondary-text-color: #b0c7d6;
-  --send-message-form: #F5F5F5;
+  --send-message-form: rgb(55, 55, 63);
 }
 
 html, body {
@@ -23,14 +23,18 @@ html, body {
   display: grid;
   height: 100%;
   grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 50px;
+  grid-template-rows: 50px 1fr 1fr 1fr 1fr 50px;
   grid-template-areas: 
+      "r t t t t t t t"
       "r m m m m m m m"
       "r m m m m m m m"
       "r m m m m m m m"
       "r m m m m m m m"
-      "r m m m m m m m"
-      "n f f f f f f f";
+      "n s s s s s s s";
+}
+
+.room-title {
+  grid-area: t;
 }
 
 .new-room-form {
@@ -46,14 +50,14 @@ html, body {
 }
 
 .send-message-form {
-  grid-area: f;
+  grid-area: s;
 }
 
 /* REST OF CSS */
 .rooms-list {
   box-sizing: border-box;
   padding: 10px;
-  background-color: var(--main-color);
+  background-color: var(--send-message-form);
   overflow: scroll;
   height: 100%;
 }
@@ -107,6 +111,7 @@ html, body {
 .new-room-form input {
   width: 135px;
   background: var(--secondary-color);
+  color: var(--secondary-text-color);
 }
 
 .new-room-form button {
@@ -181,7 +186,7 @@ html, body {
   border-style: none;
   background: var(--send-message-form);
   font-weight: 200;
-
+  color: var(--main-text-color);
 }
 
 .send-message-form input:focus {

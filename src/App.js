@@ -83,9 +83,7 @@ class App extends React.Component {
   }
 
   createNewRoom(name) {
-    this.currentUser.createRoom({
-      name
-    })
+    this.currentUser.createRoom({ name })
       .then(room => this.subscribeToRoom(room.id))
       .catch(err => console.log("Error at room creation: ", err));
   }
