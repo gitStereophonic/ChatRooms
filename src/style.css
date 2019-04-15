@@ -1,9 +1,9 @@
 :root {
-  --main-color: #5ea3d0;
-  --secondary-color: white;
-  --main-text-color: #3e5869;
+  --main-color: rgb(25, 34, 40);
+  --secondary-color: rgb(30, 33, 39);
+  --main-text-color: rgb(179, 179, 170);
   --secondary-text-color: #b0c7d6;
-  --send-message-form: #F5F5F5;
+  --send-message-form: rgb(55, 55, 63);
 }
 
 html, body {
@@ -12,7 +12,7 @@ html, body {
   padding: 0;
   font-family: system-ui;
   font-weight: 200;
-  color: 	#3e5869; 
+  color: 	#3e5869;
 }
 
 #root {
@@ -22,15 +22,19 @@ html, body {
 .app {
   display: grid;
   height: 100%;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 60px;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: 50px 1fr 1fr 1fr 1fr 50px;
   grid-template-areas: 
-      "r m m m m m"
-      "r m m m m m"
-      "r m m m m m"
-      "r m m m m m"
-      "r m m m m m"
-      "n f f f f f";
+      "r t t t t t t t"
+      "r m m m m m m m"
+      "r m m m m m m m"
+      "r m m m m m m m"
+      "r m m m m m m m"
+      "n s s s s s s s";
+}
+
+.room-title {
+  grid-area: t;
 }
 
 .new-room-form {
@@ -46,14 +50,14 @@ html, body {
 }
 
 .send-message-form {
-  grid-area: f;
+  grid-area: s;
 }
 
 /* REST OF CSS */
 .rooms-list {
   box-sizing: border-box;
   padding: 10px;
-  background-color: var(--main-color);
+  background-color: var(--send-message-form);
   overflow: scroll;
   height: 100%;
 }
@@ -70,7 +74,7 @@ html, body {
 
 .rooms-list > h3 {
   margin: 5px 0;
-  color: var(--secondary-color);
+  color: var(--main-text-color);
 }
 
 .rooms-list .room p {
@@ -78,6 +82,11 @@ html, body {
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
+}
+
+.rooms-list .room.active {
+  background-color: var(--secondary-text-color);
+  border-radius: 10px;
 }
 
 .rooms-list .room.active p {
@@ -102,6 +111,7 @@ html, body {
 .new-room-form input {
   width: 135px;
   background: var(--secondary-color);
+  color: var(--secondary-text-color);
 }
 
 .new-room-form button {
@@ -138,7 +148,7 @@ html, body {
   margin-bottom: 6px;
 }
 .message .message-text {
-  background: var(--main-color);
+  background: var(--main-text-color);
   color: var(--secondary-color);
   display: inline;
   padding: 4px 8px;
@@ -176,7 +186,7 @@ html, body {
   border-style: none;
   background: var(--send-message-form);
   font-weight: 200;
-
+  color: var(--main-text-color);
 }
 
 .send-message-form input:focus {
