@@ -3,6 +3,7 @@ import Chatkit from '@pusher/chatkit-client';
 import MessageList from './components/MessageList';
 import SendMessageForm from './components/SendMessageForm';
 import RoomList from './components/RoomList';
+import RoomTitle from './components/RoomTitle';
 import NewRoomForm from './components/NewRoomForm';
 
 import { tokenUrl, instanceLocator } from './config';
@@ -14,7 +15,9 @@ class App extends React.Component {
       messages: [],
       joinableRooms: [],
       joinedRooms: [],
-      currentRoomId: null
+      currentRoomId: null,
+      currentRoomName: '',
+      currentRoomMems: 0
     };
 
     this.sendMessage = this.sendMessage.bind(this);
@@ -57,11 +60,13 @@ class App extends React.Component {
     })
       .then(room => {
         this.setState({
-          currentRoomId: room.id
+          currentRoomId: room.id,
+          currentRoomName: room.name,
+          currentRoomMems: room.users.length
         });
         this.getRoomList();
       })
-      .catch(err => console.log("Subscribing room errpr: ", err));
+      .catch(err => console.log("Subscribing room error: ", err));
   }
 
   getRoomList() {
@@ -95,6 +100,12 @@ class App extends React.Component {
           currentRoomId={this.state.currentRoomId}
           subscribeToRoom={this.subscribeToRoom}
           rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}
+        />
+        <RoomTitle
+          roomId={this.state.currentRoomId}
+          roomName={this.state.currentRoomName}
+          memCount={this.state.currentRoomMems}
+          onClickHandler={() => console.log('Title clicked!')}
         />
         <MessageList
           currentRoomId={this.state.currentRoomId}
