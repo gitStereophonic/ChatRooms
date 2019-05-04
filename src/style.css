@@ -79,20 +79,49 @@ html, body {
 
 .rooms-list .room p {
   color: var(--secondary-text-color);
+  margin-left: 0;
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
+  transition: margin-left 2s ease-in-out, color 2s ease-in-out;
+}
+
+.rooms-list .room {
+  background-color: transparent;
+  border-radius: 10px;
+  transition: background-color 2s ease-in-out;
 }
 
 .rooms-list .room.active {
   background-color: var(--secondary-text-color);
-  border-radius: 10px;
+  transition: none;
 }
 
 .rooms-list .room.active p {
+  margin-left: 10px;
   color: var(--secondary-color);
+  transition: none;
   cursor: pointer;
-  margin-left: 30px;
+}
+
+.room-title {
+  background-color: var(--main-color);
+  border-bottom: 1px solid var(--main-text-color);
+  color: var(--main-text-color);
+}
+
+.room-title h4 {
+  margin-block-start: 5px;
+  margin-block-end: 5px;
+  margin-inline-start: 10px;
+}
+
+.room-title p {
+  margin-block-start: 5px;
+  margin-block-end: 5px;
+  margin-inline-start: 10px;
+  font-size: 11px;
+  opacity: 0.5;
 }
 
 .new-room-form {
