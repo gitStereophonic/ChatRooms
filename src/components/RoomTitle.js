@@ -9,8 +9,6 @@ function RoomTitle(props) {
   const members =
     props.memCount === 1 ? " member" : " members";
 
-  console.log('RoomTitle members: ', members);
-
   return (
     <div className="room-title" onClick={props.onClickHandler}>
       <h4>
