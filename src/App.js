@@ -7,6 +7,7 @@ import RoomTitle from './components/RoomTitle';
 import NewRoomForm from './components/NewRoomForm';
 
 import { tokenUrl, instanceLocator } from './config';
+import RightSideWidget from './components/RightSideWidget';
 
 class App extends React.Component {
   constructor() {
@@ -99,7 +100,6 @@ class App extends React.Component {
     this.setState(prevState => {
       return ({ settingsIsActive: !prevState.settingsIsActive })
     });
-    console.log(this.state.settingsIsActive ? 'Settings active' : 'Settings inactive');
   }
 
   render() {
@@ -119,6 +119,10 @@ class App extends React.Component {
         <MessageList
           currentRoomId={this.state.currentRoomId}
           messages={this.state.messages}
+        />
+        <RightSideWidget
+          isActive={this.state.settingsIsActive}
+          title='Settings'
         />
         <SendMessageForm
           disabled={!this.state.currentRoomId}
