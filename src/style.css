@@ -230,3 +230,57 @@ html, body {
   position: absolute;
   top: 10px;
 }
+
+.right-side-widget {
+  position: absolute;
+  right: 0;
+  
+  background-color: var(--secondary-color);
+  height: 100%;
+}
+
+@keyframes move-from-right {
+  from {
+    z-index: -1;
+    width: 0;
+  }
+  to {
+    z-index: 1;
+    width: 20%;
+  }
+}
+
+@keyframes move-to-right {
+  from {
+    z-index: 1;
+    width: 20%;
+  }
+  to {
+    z-index: -1;
+    width: 0;
+  }
+}
+
+.right-side-widget-active {
+  display: block;
+  animation-name: move-from-right;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.right-side-widget-non-active {
+  display: none;
+  width: 0;
+  animation-name: move-to-right;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.right-side-widget h3 {
+  border-bottom: 1px solid var(--main-text-color);
+  color: var(--main-text-color);
+}
+
+.widget-body {
+  color: var(--main-text-color);
+}
