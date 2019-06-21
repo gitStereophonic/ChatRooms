@@ -17,13 +17,15 @@ class App extends React.Component {
       joinedRooms: [],
       currentRoomId: null,
       currentRoomName: '',
-      currentRoomMems: 0
+      currentRoomMems: 0,
+      settingsIsActive: false
     };
 
     this.sendMessage = this.sendMessage.bind(this);
     this.subscribeToRoom = this.subscribeToRoom.bind(this);
     this.getRoomList = this.getRoomList.bind(this);
     this.createNewRoom = this.createNewRoom.bind(this);
+    this.toggleSettings = this.toggleSettings.bind(this);
   }
 
   componentDidMount() {
@@ -93,6 +95,12 @@ class App extends React.Component {
       .catch(err => console.log("Error at room creation: ", err));
   }
 
+  toggleSettings() {
+    this.setState(prevState => {
+      return ({ settingsIsActive: !prevState.settingsIsActive })
+    });
+  }
+
   render() {
     return (
       <div className="app">
@@ -105,11 +113,12 @@ class App extends React.Component {
           roomId={this.state.currentRoomId}
           roomName={this.state.currentRoomName}
           memCount={this.state.currentRoomMems}
-          onClickHandler={() => console.log('Title clicked!')}
+          onClickHandler={this.toggleSettings}
         />
         <MessageList
           currentRoomId={this.state.currentRoomId}
           messages={this.state.messages}
+          rightWidgetIsActive={this.state.settingsIsActive}
         />
         <SendMessageForm
           disabled={!this.state.currentRoomId}

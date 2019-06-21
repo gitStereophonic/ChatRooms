@@ -230,3 +230,81 @@ html, body {
   position: absolute;
   top: 10px;
 }
+
+.right-side-widget {
+  position: fixed;
+  right: 0;
+  top: 0;
+  display: block;
+  background-color: var(--secondary-color);
+  height: 100%;
+}
+
+@keyframes move-from-right {
+  from {
+    z-index: -1;
+    width: 5%;
+    opacity: 0;
+  }
+  85% {
+    width: 20%;
+    opacity: 1;
+  }
+  to {
+    z-index: 1;
+    width: 20%;
+  }
+}
+
+@keyframes move-to-right {
+  from {
+    z-index: 1;
+    width: 20%;
+    opacity: 1;
+  }
+  85% {
+    width: 5%;
+    opacity: 0;
+  }
+  to {
+    z-index: -1;
+    width: 5%;
+  }
+}
+
+.right-side-widget-active {
+  display: block;
+  animation-name: move-from-right;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.right-side-widget-non-active {
+  animation-name: move-to-right;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.widget-body {
+  color: var(--main-text-color);
+}
+
+.widget-title {
+  background-color: var(--main-color);
+  border-bottom: 1px solid var(--main-text-color);
+  color: var(--main-text-color);
+}
+
+.widget-title h4 {
+  margin-block-start: 5px;
+  margin-block-end: 5px;
+  margin-inline-start: 10px;
+}
+
+.widget-title p {
+  margin-block-start: 5px;
+  margin-block-end: 5px;
+  margin-inline-start: 10px;
+  font-size: 11px;
+  opacity: 0.5; 
+}
