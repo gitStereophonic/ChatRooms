@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Message from './Message';
+import RightSideWidget from './RightSideWidget';
 
 class MessageList extends Component {
   componentWillUpdate() {
@@ -41,6 +42,10 @@ class MessageList extends Component {
               />
             );
           })}
+          <RightSideWidget
+            isActive={this.props.rightWidgetIsActive}
+            title='Settings'
+          />
         </div>
       );
   }

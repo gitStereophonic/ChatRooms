@@ -12,9 +12,12 @@ function RightSideWidget(props) {
         )
       }
     >
-      < h3 > {props.title}</h3 >
+      <div className='widget-title'>
+        <h4>{props.title}</h4>
+        <p>Set up chat room</p>
+      </div>
       <div className='widget-body'>
-        <input type='checkbox'></input>
+        <input type='checkbox'> Wanna some settings, man? </input>
       </div>
     </div>
   );
