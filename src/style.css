@@ -232,9 +232,10 @@ html, body {
 }
 
 .right-side-widget {
-  position: absolute;
+  position: fixed;
   right: 0;
-  
+  top: 0;
+  display: block;
   background-color: var(--secondary-color);
   height: 100%;
 }
@@ -242,7 +243,12 @@ html, body {
 @keyframes move-from-right {
   from {
     z-index: -1;
-    width: 0;
+    width: 5%;
+    opacity: 0;
+  }
+  85% {
+    width: 20%;
+    opacity: 1;
   }
   to {
     z-index: 1;
@@ -254,10 +260,15 @@ html, body {
   from {
     z-index: 1;
     width: 20%;
+    opacity: 1;
+  }
+  85% {
+    width: 5%;
+    opacity: 0;
   }
   to {
     z-index: -1;
-    width: 0;
+    width: 5%;
   }
 }
 
@@ -269,18 +280,31 @@ html, body {
 }
 
 .right-side-widget-non-active {
-  display: none;
-  width: 0;
   animation-name: move-to-right;
   animation-duration: 1s;
   animation-fill-mode: both;
 }
 
-.right-side-widget h3 {
+.widget-body {
+  color: var(--main-text-color);
+}
+
+.widget-title {
+  background-color: var(--main-color);
   border-bottom: 1px solid var(--main-text-color);
   color: var(--main-text-color);
 }
 
-.widget-body {
-  color: var(--main-text-color);
+.widget-title h4 {
+  margin-block-start: 5px;
+  margin-block-end: 5px;
+  margin-inline-start: 10px;
+}
+
+.widget-title p {
+  margin-block-start: 5px;
+  margin-block-end: 5px;
+  margin-inline-start: 10px;
+  font-size: 11px;
+  opacity: 0.5; 
 }
