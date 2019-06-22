@@ -5,6 +5,7 @@ import SendMessageForm from './components/SendMessageForm';
 import RoomList from './components/RoomList';
 import RoomTitle from './components/RoomTitle';
 import NewRoomForm from './components/NewRoomForm';
+import RightSideWidget from './components/RightSideWidget';
 
 import { tokenUrl, instanceLocator } from './config';
 
@@ -18,7 +19,8 @@ class App extends React.Component {
       currentRoomId: null,
       currentRoomName: '',
       currentRoomMems: 0,
-      settingsIsActive: false
+      settingsIsActive: false,
+      settingsClass: ''
     };
 
     this.sendMessage = this.sendMessage.bind(this);
@@ -97,7 +99,11 @@ class App extends React.Component {
 
   toggleSettings() {
     this.setState(prevState => {
-      return ({ settingsIsActive: !prevState.settingsIsActive })
+      return ({
+        settingsIsActive: !prevState.settingsIsActive,
+        settingsClass: !prevState.settingsIsActive
+          ? 'right-side-widget-active' : 'right-side-widget-non-active'
+      })
     });
   }
 
@@ -118,13 +124,16 @@ class App extends React.Component {
         <MessageList
           currentRoomId={this.state.currentRoomId}
           messages={this.state.messages}
-          rightWidgetIsActive={this.state.settingsIsActive}
         />
         <SendMessageForm
           disabled={!this.state.currentRoomId}
           sendMessage={this.sendMessage}
         />
         <NewRoomForm createNewRoom={this.createNewRoom} />
+        <RightSideWidget
+          title='Settings'
+          mode={this.state.settingsClass}
+        />
       </div>
     );
   }
