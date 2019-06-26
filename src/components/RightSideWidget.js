@@ -10,7 +10,10 @@ function RightSideWidget(props) {
       <div className='widget-body'>
         <input id='settOn' type='checkbox'></input>
         <label for='settOn'>Wanna some settings, man? </label>
-        <button className='histeric'>Hysteric button (Кнопка истерички)</button>
+        <div className='histeric'>
+          <span> Delete my account </span>
+          <button className='histeric-btn'>Hysteric button (Кнопка истерички)</button>
+        </div>
       </div>
     </div>
   );
